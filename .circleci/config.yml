@@ -3,7 +3,7 @@ version: 2.1
 orbs: 
   slack: circleci/slack@4.10.1
   node: circleci/node@5.0.2
-  
+
 commands:
   destroy-environment:
     description: Destroy back-end and front-end cloudformation stacks given a workflow ID.
@@ -128,7 +128,12 @@ jobs:
           mentions: "@Ufonabasi Umo"
           template: basic_fail_1
           event: fail
-
+      - slack/notify:
+          channel: C040UNU8SLC
+          event: pass
+          template: CircleCI has been added to slack
+          mentions: "@Ufonabasi Umo"
+          
   scan-backend:
     docker:
       # Docker image here
@@ -152,6 +157,12 @@ jobs:
           mentions: "@Ufonabasi Umo"
           template: basic_fail_1
           event: fail
+      - slack/notify:
+          channel: C040UNU8SLC
+          event: pass
+          template: CircleCI has been added to slack
+          mentions: "@Ufonabasi Umo"
+
 
 #   deploy-infrastructure:
 #     docker:
