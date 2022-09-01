@@ -124,16 +124,16 @@ jobs:
             npm audit fix --force
             npm audit --audit-level=critical
       - slack/notify: 
-          channel: C040UNU8SLC
-          mentions: "@Ufonabasi Umo"
+          channel: C0414TUCNG1
+          mentions: "@Ufon"
           template: basic_fail_1
           event: fail
       - slack/notify:
-          channel: C040UNU8SLC
+          channel: C0414TUCNG1
           event: pass
           template: CircleCI has been added to slack
-          mentions: "@Ufonabasi Umo"
-          
+          mentions: "@Ufon"
+
   scan-backend:
     docker:
       # Docker image here
@@ -153,15 +153,15 @@ jobs:
             npm audit fix --force
             npm audit --audit-level=critical
       - slack/notify: 
-          channel: C040UNU8SLC
-          mentions: "@Ufonabasi Umo"
+          channel: C0414TUCNG1
+          mentions: "@Ufon"
           template: basic_fail_1
           event: fail
       - slack/notify:
-          channel: C040UNU8SLC
+          channel: C0414TUCNG1
           event: pass
           template: CircleCI has been added to slack
-          mentions: "@Ufonabasi Umo"
+          mentions: "@Ufon"
 
 
 #   deploy-infrastructure:
