@@ -3,10 +3,10 @@ version: 2.1
 commands:
   destroy-environment:
     description: Destroy back-end and front-end cloudformation stacks given a workflow ID.
-    parameters:
-      # Add parameter here   
-      message:
-        type: string
+    # parameters:
+    #   # Add parameter here   
+    #   message:
+    #     type: string
     steps:
       - run:
           name: Destroy environments
@@ -17,10 +17,10 @@ commands:
 
   revert-migrations:
     description: Revert the last migration if successfully run in the current workflow.
-    parameters: 
-      # Add parameter here  
-      message:
-        type: string   
+    # parameters: 
+    #   # Add parameter here  
+    #   message:
+    #     type: string   
     steps:
       - run:
           name: Revert migrations
@@ -78,28 +78,28 @@ jobs:
       - image: circleci/node:13.8.0
     steps:
       - checkout
-      - restore_cache: 
-          keys: [build-frontend]
+      - restore_cache:
+          keys: [frontend-build]
       - run: 
-          name: Run frontend test
-          command: 
-              cd frontend
-              npm install
-              npm run test
+          name: Test Frontend 
+          command: |
+            cd frontend 
+            npm install 
+            npm run test 
                 
   test-backend:
     docker:
       - image: circleci/node:13.8.0
     steps:
       - checkout
-      - restore_cache: 
-          keys: [build-backend]
+      - restore_cache:
+          keys: [backend-build]
       - run: 
-          name: Run backend test
-          command: 
-              cd backend
-              npm install
-              npm run test
+          name: Test Backend 
+          command: |
+            cd backend
+            npm install 
+            npm run test
             
   # scan-frontend:
   #   docker:
