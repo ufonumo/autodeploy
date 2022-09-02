@@ -128,12 +128,6 @@ jobs:
           mentions: "@Ufon"
           template: basic_fail_1
           event: fail
- 
-      - slack/notify:
-          channel: D040UNZB5J8
-          event: pass
-          template: CircleCI has been added to slack
-          mentions: "@Ufon"
 
   scan-backend:
     docker:
@@ -158,11 +152,6 @@ jobs:
           mentions: "@Ufon"
           template: basic_fail_1
           event: fail
-      - slack/notify:
-          channel: D040UNZB5J8
-          event: pass
-          template: CircleCI has been added to slack
-          mentions: "@Ufon"
 
   deploy-infrastructure:
     docker:
