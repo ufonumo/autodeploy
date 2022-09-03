@@ -151,10 +151,8 @@ jobs:
 
   deploy-infrastructure:
     docker:
-      # Docker image here that supports AWS CLI
       - image: amazon/aws-cli
     steps:
-      # Checkout code from git
       - checkout
       - run:
           name: Install dependencies
@@ -187,8 +185,7 @@ jobs:
           paths: 
             - project/.circleci/ansible/inventory.txt
       - destroy-infrastructure
-      # Here's where you will add some code to rollback on failure      
-
+      
   configure-infrastructure:
     docker:
       # Docker image here that supports Ansible
