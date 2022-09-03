@@ -200,7 +200,6 @@ jobs:
       - image: python:3.7-alpine3.11
     steps:
       - checkout
-      # Checkout code from git
       # Add ssh keys with fingerprint
       - add_ssh_keys:
           fingerprints: ["41:c5:19:fd:cb:f2:b9:15:c0:c7:71:04:da:2e:64:cb:33:ca:54:de:2c:2f:05:ec:60:fb:ad:15:de:3b:69:1c"]
@@ -222,8 +221,6 @@ jobs:
           no_output_timeout: 25m
       - destroy-infrastructure
           # workflow_id: ${CIRCLE_WORKFLOW_ID:0:7}
-
-      # Here's where you will add some code to rollback on failure      
 
   run-migrations:
     docker:
