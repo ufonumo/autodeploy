@@ -204,7 +204,7 @@ jobs:
       # Add ssh keys with fingerprint
       - add_ssh_keys:
          fingerprints:
-            - "41:c5:19:fd:cb:f2:b9:15:c0:c7:71:04:da:2e:64:cb:33:ca:54:de:2c:2f:05:ec:60:fb:ad:15:de:3b:69:1c"
+            - "fd:89:65:7b:fb:3a:79:47:1c:50:57:c0:83:7f:ca:d9"
       # attach workspace
       - attach_workspace:
           at: ~/
@@ -223,10 +223,11 @@ jobs:
       # Here's where you will add some code to rollback on failure
       - destroy-infrastructure
 
+
   run-migrations:
     docker:
       # Docker image here that supports NodeJS
-      - image: circleci/node:^14.15.0
+      - image: circleci/node:13.8.0
     steps:
       # Checkout code from git
       - checkout
@@ -295,7 +296,7 @@ jobs:
       - restore_cache: 
           keys: [build-backend]
       - add_ssh_keys: 
-          fingerprints: ["41:c5:19:fd:cb:f2:b9:15:c0:c7:71:04:da:2e:64:cb:33:ca:54:de:2c:2f:05:ec:60:fb:ad:15:de:3b:69:1c"]
+          fingerprints: ["fd:89:65:7b:fb:3a:79:47:1c:50:57:c0:83:7f:ca:d9"]
       - attach_workspace:
           at: ~/
       - run: 
