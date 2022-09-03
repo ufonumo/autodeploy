@@ -193,34 +193,35 @@ jobs:
           paths: 
             - project/.circleci/ansible/inventory.txt
       - destroy-infrastructure
-      
+
   configure-infrastructure:
     docker:
       # Docker image here that supports Ansible
-      - image: python:3.7-alpine3.11
+      - image: python:3.10-alpine3.16
     steps:
+      # Checkout code from git
       - checkout
       # Add ssh keys with fingerprint
       - add_ssh_keys:
-          fingerprints: ["41:c5:19:fd:cb:f2:b9:15:c0:c7:71:04:da:2e:64:cb:33:ca:54:de:2c:2f:05:ec:60:fb:ad:15:de:3b:69:1c"]
+         fingerprints:
+            - "41:c5:19:fd:cb:f2:b9:15:c0:c7:71:04:da:2e:64:cb:33:ca:54:de:2c:2f:05:ec:60:fb:ad:15:de:3b:69:1c"
       # attach workspace
       - attach_workspace:
           at: ~/
-      - run: 
+      - run:
           name: Install dependencies
           command: |
             apk add --update --no-cache ansible tar gzip aws-cli openssh
-            # apk add --update --no-cache ansible tar gzip aws-cli curl nodejs npm python
       - run:
-          name: configure server 
+          name: Configure server
           command: |
-            pwd 
+            pwd
             cd .circleci/ansible
             ls -al
             ansible-playbook -i inventory.txt configure-server.yml
           no_output_timeout: 25m
+      # Here's where you will add some code to rollback on failure
       - destroy-infrastructure
-          # workflow_id: ${CIRCLE_WORKFLOW_ID:0:7}
 
   run-migrations:
     docker:
