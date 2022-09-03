@@ -1,4 +1,5 @@
 URL01: https://github.com/ufonumo/autodeploy
+URL02: http://udapeople-7bc0569.s3-website-us-east-1.amazonaws.com/
 
 ## Give your Application Auto-Deploy Superpowers
 
