@@ -183,10 +183,10 @@ jobs:
           name: Retrieve backend server ip and add it to ansible inventory
           command: |
             pwd
-            aws ec2 describe-instances 
-            --query 'Reservations[*].Instances[*].[PublicIpAddress]' 
-            --filters "Name=tag:Name,Values=backend-${CIRCLE_WORKFLOW_ID:0:7}" 
-            --output text >> ~/project/.circleci/ansible/inventory.txt
+            aws ec2 describe-instances \
+            --query 'Reservations[*].Instances[*].[PublicIpAddress]' \
+            --filters "Name=tag:Name,Values=backend-${CIRCLE_WORKFLOW_ID:0:7}" \
+            --output text >> ~/project/.circleci/ansible/inventory.txt \
             cat ~/project/.circleci/ansible/inventory.txt
       - persist_to_workspace:
           root: ~/
