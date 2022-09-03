@@ -183,7 +183,10 @@ jobs:
           name: Retrieve backend server ip and add it to ansible inventory
           command: |
             pwd
-            aws ec2 describe-instances --query 'Reservations[*].Instances[*].PublicIpAddress' --filters "Name=tag:aws:cloudformation:stack-name,Values=udapeople-backend-${CIRCLE_WORKFLOW_ID:0:7}" --output text >> ~/project/.circleci/ansible/inventory.txt
+            aws ec2 describe-instances 
+            --query 'Reservations[*].Instances[*].[PublicIpAddress]' 
+            --filters "Name=tag:aws:cloudformation:stack-name,Values=udapeople-backend-${CIRCLE_WORKFLOW_ID:0:7}" 
+            --output text >> ~/project/.circleci/ansible/inventory.txt
             cat ~/project/.circleci/ansible/inventory.txt
       - persist_to_workspace:
           root: ~/
@@ -207,8 +210,8 @@ jobs:
       - run: 
           name: Install dependencies
           command: |
-            apk add --update --no-cache ansible tar gzip aws-cli curl nodejs npm python
-
+            apk add --update --no-cache ansible tar gzip aws-cli openssh python nodejs
+            # apk add --update --no-cache ansible tar gzip aws-cli curl nodejs npm python
       - run:
           name: configure server 
           command: |
