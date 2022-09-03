@@ -1,14 +1,47 @@
---- 
-
-- name: Extract artifact to ec2 
+---
+- name: "update local apt repo."
   become: true
-  unarchive: 
-    src: artifact.tar.gz
-    dest: .
+  apt:
+    update_cache: yes
 
-- name: Start app 
-  become: true 
+- name: "upgrade apt packages"
+  become: true
+  apt:
+    upgrade: yes
+
+- name: "remove stale dependencies"
+  become: true
+  apt:
+    autoremove: yes
+
+- name: "install dependencies [nodejs and npm]."
+  become: true
+  apt:
+    name: ["nodejs", "npm"]
+    state: latest
+    update_cache: yes
+
+- name: "install pm2"
+  become: true
+  npm:
+    name: pm2
+    global: yes
+    production: yes
+    state: present
+
+- name: "Copy artifact into Instance" 
+  become: true
+  copy:
+    src: ~/project/artifact.tar.gz
+    dest: /home/ubuntu/artifact.tar.gz
+
+
+- name: "Start app"
+  become: true
   shell: |
+    cd /home/ubuntu
+    tar xzvf artifact.tar.gz
     npm install
-    pm2 stop default
+    npm run build
+    pm2 stop all
     pm2 start npm -- start
