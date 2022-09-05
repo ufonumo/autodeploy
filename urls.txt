@@ -1,0 +1,4 @@
+URL01: https://github.com/ufonumo/autodeploy
+URL02: http://udapeople-4bb071a.s3-website-us-east-1.amazonaws.com
+URL03: udapeople-a56f1f9.s3.amazonaws.com | d29h6v7w0k9fpd.cloudfront.net
+URL04: http://52.207.216.23:3030/api/status 
