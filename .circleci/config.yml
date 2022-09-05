@@ -253,9 +253,13 @@ jobs:
                 curl --insecure https://kvdb.io/W4WbAeKNcWxHFPcgBF3RRy/migration_${CIRCLE_WORKFLOW_ID:0:7} -d '1'
             fi
       - destroy-infrastructure:
-          workflow_id: ${CIRCLE_WORKFLOW_ID:0:7}
+          workflow_id:
+            type: string    
+            default: '${CIRCLE_WORKFLOW_ID:0:7}'
       - revert-migrations: 
-          workflow_id: ${CIRCLE_WORKFLOW_ID:0:7}
+          workflow_id:
+            type: string    
+            default: '${CIRCLE_WORKFLOW_ID:0:7}'
 
 
   deploy-frontend:
@@ -294,9 +298,13 @@ jobs:
             tar -czvf artifact-"${CIRCLE_WORKFLOW_ID:0:7}".tar.gz dist
             aws s3 cp dist s3://udapeople-${CIRCLE_WORKFLOW_ID:0:7} --recursive 
       - destroy-infrastructure:
-          workflow_id: ${CIRCLE_WORKFLOW_ID:0:7}
+          workflow_id:
+            type: string    
+            default: '${CIRCLE_WORKFLOW_ID:0:7}'
       - revert-migrations: 
-          workflow_id: ${CIRCLE_WORKFLOW_ID:0:7}
+          workflow_id:
+            type: string    
+            default: '${CIRCLE_WORKFLOW_ID:0:7}'
 
   deploy-backend:
     docker:
@@ -348,10 +356,14 @@ jobs:
             cat inventory.txt
             ansible-playbook -i inventory.txt deploy-backend.yml
       - destroy-infrastructure:
-          workflow_id: ${CIRCLE_WORKFLOW_ID:0:7}
+          workflow_id:
+            type: string    
+            default: '${CIRCLE_WORKFLOW_ID:0:7}'
       - revert-migrations: 
-          workflow_id: ${CIRCLE_WORKFLOW_ID:0:7}
-          
+          workflow_id:
+            type: string    
+            default: '${CIRCLE_WORKFLOW_ID:0:7}'
+
   smoke-test:
     docker:
       # Lightweight Docker image
