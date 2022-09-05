@@ -252,10 +252,8 @@ jobs:
             then
                 curl --insecure https://kvdb.io/W4WbAeKNcWxHFPcgBF3RRy/migration_${CIRCLE_WORKFLOW_ID:0:7} -d '1'
             fi
-      - destroy-infrastructure:
-          workflow_id: '${CIRCLE_WORKFLOW_ID:0:7}'
-      - revert-migrations: 
-          workflow_id: '${CIRCLE_WORKFLOW_ID:0:7}'
+      - destroy-infrastructure
+      - revert-migrations
 
 
   deploy-frontend:
@@ -293,10 +291,8 @@ jobs:
             npm run build
             tar -czvf artifact-"${CIRCLE_WORKFLOW_ID:0:7}".tar.gz dist
             aws s3 cp dist s3://udapeople-${CIRCLE_WORKFLOW_ID:0:7} --recursive 
-      - destroy-infrastructure:
-          workflow_id: '${CIRCLE_WORKFLOW_ID:0:7}'
-      - revert-migrations: 
-          workflow_id: '${CIRCLE_WORKFLOW_ID:0:7}'
+      - destroy-infrastructure
+      - revert-migrations
 
   deploy-backend:
     docker:
@@ -347,10 +343,8 @@ jobs:
             echo "Contents  of the inventory.txt file is -------"
             cat inventory.txt
             ansible-playbook -i inventory.txt deploy-backend.yml
-      - destroy-infrastructure:
-          workflow_id: '${CIRCLE_WORKFLOW_ID:0:7}'
-      - revert-migrations: 
-          workflow_id: '${CIRCLE_WORKFLOW_ID:0:7}'
+      - destroy-infrastructure
+      - revert-migrations
           
   smoke-test:
     docker:
@@ -434,6 +428,7 @@ jobs:
             echo OldWorkflowID: cat ~/project/OldWorkflowID.txt
             echo CurrentWorflowID: "${CIRCLE_WORKFLOW_ID:0:7}"
       - destroy-infrastructure
+      - revert-migrations
       # Here's where you will add some code to rollback on failure
 
   cleanup:
